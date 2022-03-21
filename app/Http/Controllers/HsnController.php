@@ -51,7 +51,13 @@ class HsnController extends Controller
      */
     public function show($id)
     {
-        // 
+        //this funciton using delete id
+        if($id)
+        {
+            // return 123;
+            Hsn::find($id)->delete();
+        }
+        return redirect()->back();
     }
 
     /**

@@ -360,11 +360,16 @@
                                     <button type="button" class="btn btn-primary buy-now fw-600" onclick="buyNow()">
                                         <i class="la la-shopping-cart"></i> {{ translate('Buy Now')}}
                                     </button>
-                                    <select name="coupon_type" id="coupon_type" class="w-180  ml-2 form-control aiz-selectpicker" onchange="coupon_form()" required>
+                                    <div class="pt-3">
+                                        <p  >{{ translate('Lowest Price')}}</p>
+                                        <p  >{{ translate('Easy Returns')}}</p>
+                                        <p  >{{ translate('Cash On Delivery')}}</p>
+                                    </div>
+                                    {{-- <select name="coupon_type" id="coupon_type" class="w-180  ml-2 form-control aiz-selectpicker" onchange="coupon_form()" required>
                                         <option value="lowest_price">{{translate('Lowest Price')}}</option>
                                         <option value="easy_returns">{{translate('Easy Returns')}}</option>
                                         <option value="cash_on_delivery">{{translate('Cash On Delivery')}}</option>
-                                    </select>
+                                    </select> --}}
                                 @endif
                                 <button type="button" class="btn btn-secondary out-of-stock fw-600 d-none" disabled>
                                     <i class="la la-cart-arrow-down"></i> {{ translate('Out of Stock')}}

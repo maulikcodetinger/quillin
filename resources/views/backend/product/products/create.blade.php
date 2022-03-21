@@ -16,14 +16,11 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Product Name')}} <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
+                            {{-- <label class="col-md-3 col-from-label">{{translate('Product Name')}} <span class="text-danger">*</span></label> --}}
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" name="name" placeholder="{{ translate('Product Name') }}" onchange="update_sku()" required>
                             </div>
-                        </div>
-                        <div class="form-group row" id="category">
-                            <label class="col-md-3 col-from-label">{{translate('Category')}} <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" name="category_id" value="{{ $category->getTranslation('name') }}" required disabled>
                                 <input type="hidden" class="form-control" name="category_id" value="{{ $category->id }}" required disabled>
 {{-- 
@@ -36,10 +33,27 @@
                                     @endforeach
                                 </select> --}}
                             </div>
+                            {{-- <input type="text" class="form-control" name="category_id" value="{{ $category->getTranslation('name') }}" required disabled> --}}
                         </div>
+                        {{-- <div class="form-group row" id="category"> --}}
+                            {{-- <label class="col-md-3 col-from-label">{{translate('Category')}} <span class="text-danger">*</span></label> --}}
+                            {{-- <div class="col-md-6">
+                                <input type="text" class="form-control" name="category_id" value="{{ $category->getTranslation('name') }}" required disabled>
+                                <input type="hidden" class="form-control" name="category_id" value="{{ $category->id }}" required disabled> --}}
+{{-- 
+                                <select class="form-control aiz-selectpicker" name="category_id" id="category_id" data-live-search="true" required>
+                                    @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->getTranslation('name') }}</option>
+                                    @foreach ($category->childrenCategories as $childCategory)
+                                    @include('categories.child_category', ['child_category' => $childCategory])
+                                    @endforeach
+                                    @endforeach
+                                </select> --}}
+                            {{-- </div> --}}
+                        {{-- </div> --}}
                         <div class="form-group row" id="brand">
-                            <label class="col-md-3 col-from-label">{{translate('Brand')}}</label>
-                            <div class="col-md-8">
+                            {{-- <label class="col-md-3 col-from-label">{{translate('Brand')}}</label> --}}
+                            <div class="col-md-6">
                                 <select class="form-control aiz-selectpicker" name="brand_id" id="brand_id" data-live-search="true">
                                     <option value="">{{ translate('Select Brand') }}</option>
                                     @foreach (\App\Models\Brand::all() as $brand)
@@ -47,26 +61,33 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Unit')}}</label>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" name="unit" placeholder="{{ translate('Unit (e.g. KG, Pc etc)') }}" required>
                             </div>
                         </div>
+                        {{-- <div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Unit')}}</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="unit" placeholder="{{ translate('Unit (e.g. KG, Pc etc)') }}" required>
+                            </div>
+                        </div> --}}
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Minimum Purchase Qty')}} <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
+                            {{-- <label class="col-md-3 col-from-label">{{translate('Minimum Purchase Qty')}} <span class="text-danger">*</span></label> --}}
+                            <div class="col-md-6">
                                 <input type="number" lang="en" class="form-control" name="min_qty" value="1" min="1" required>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Tags')}} <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="text" class="form-control aiz-tag-input" name="tags[]" placeholder="{{ translate('Type and hit enter to add a tag') }}">
                                 <small class="text-muted">{{translate('This is used for search. Input those words by which cutomer can find this product.')}}</small>
                             </div>
                         </div>
+                        {{-- <div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Tags')}} <span class="text-danger">*</span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control aiz-tag-input" name="tags[]" placeholder="{{ translate('Type and hit enter to add a tag') }}">
+                                <small class="text-muted">{{translate('This is used for search. Input those words by which cutomer can find this product.')}}</small>
+                            </div>
+                        </div> --}}
 
                         @if (addon_is_activated('pos_system'))
                         <div class="form-group row">
@@ -114,11 +135,11 @@
                             <label class="col-md-3 col-form-label" for="signinSrEmail">{{translate('Thumbnail Image')}} <small>(300x300)</small></label>
                             <div class="col-md-8">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
-                                    <div class="input-group-prepend">
+                                    {{-- <div class="input-group-prepend">
                                         <div class="input-group-text bg-soft-secondary font-weight-medium">{{ translate('Browse')}}</div>
                                     </div>
-                                    <div class="form-control file-amount">{{ translate('Choose File') }}</div>
-                                    <input type="hidden" name="thumbnail_img" class="selected-files">
+                                    <div class="form-control file-amount">{{ translate('Choose File') }}</div> --}}
+                                    <input type="file" name="thumbnail_img" class="selected-files">
                                 </div>
                                 <div class="file-preview box sm">
                                 </div>
@@ -160,7 +181,7 @@
                             <div class="col-md-3">
                                 <input type="text" class="form-control" value="{{translate('Colors')}}" disabled>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <select class="form-control aiz-selectpicker" data-live-search="true" data-selected-text-format="count" name="colors[]" id="colors" multiple disabled>
                                     @foreach (\App\Models\Color::orderBy('name', 'asc')->get() as $key => $color)
                                     <option  value="{{ $color->code }}" data-content="<span><span class='size-15px d-inline-block mr-2 rounded border' style='background:{{ $color->code }}'></span><span>{{ $color->name }}</span></span>"></option>
@@ -174,7 +195,6 @@
                                 </label>
                             </div>
                         </div>
-
                         <div class="form-group row gutters-5">
                             <div class="col-md-3">
                                 <input type="text" class="form-control" value="{{translate('Attributes')}}" disabled>
@@ -197,29 +217,33 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{translate('Product price + stock')}}</h5>
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Unit price')}} <span class="text-danger">*</span></label>
+                            {{-- <label class="col-md-3 col-from-label">{{translate('Unit price')}} <span class="text-danger">*</span></label> --}}
                             <div class="col-md-6">
-                                <input type="number" lang="en" min="0" value="0" step="0.01" placeholder="{{ translate('Unit price') }}" name="unit_price" class="form-control" required>
+                                <input type="number" lang="en" min="0" value="" step="0.01" placeholder="{{ translate('Unit price') }}" name="unit_price" class="form-control" required>
                             </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control aiz-date-range" name="date_range" placeholder="{{translate('Select Date')}}" data-time-picker="true" data-format="DD-MM-Y HH:mm:ss" data-separator=" to " autocomplete="off">
+                              </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
 	                        <label class="col-sm-3 control-label" for="start_date">{{translate('Discount Date Range')}}</label>
 	                        <div class="col-sm-9">
 	                          <input type="text" class="form-control aiz-date-range" name="date_range" placeholder="{{translate('Select Date')}}" data-time-picker="true" data-format="DD-MM-Y HH:mm:ss" data-separator=" to " autocomplete="off">
 	                        </div>
-	                    </div>
+	                    </div> --}}
 
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Discount')}} <span class="text-danger">*</span></label>
-                            <div class="col-md-6">
-                                <input type="number" lang="en" min="0" value="0" step="0.01" placeholder="{{ translate('Discount') }}" name="discount" class="form-control" required>
+                            {{-- <label class="col-md-3 col-from-label">{{translate('Discount')}} <span class="text-danger">*</span></label> --}}
+                            <div class="col-md-5">
+                                <input type="number" lang="en" min="0" value="" step="0.01" placeholder="{{ translate('Discount') }}" name="discount" class="form-control" required>
                             </div>
                             <div class="col-md-3">
                                 <select class="form-control aiz-selectpicker" name="discount_type">
@@ -228,33 +252,35 @@
                                 </select>
                             </div>
                         </div>
-
                         @if(addon_is_activated('club_point'))
                             <div class="form-group row">
                                 <label class="col-md-3 col-from-label">
                                     {{translate('Set Point')}}
                                 </label>
                                 <div class="col-md-6">
-                                    <input type="number" lang="en" min="0" value="0" step="1" placeholder="{{ translate('1') }}" name="earn_point" class="form-control">
+                                    <input type="number" lang="en" min="0" value="" step="1" placeholder="{{ translate('1') }}" name="earn_point" class="form-control">
                                 </div>
                             </div>
                         @endif
 
                         <div id="show-hide-div">
                             <div class="form-group row">
-                                <label class="col-md-3 col-from-label">{{translate('Quantity')}} <span class="text-danger">*</span></label>
+                                {{-- <label class="col-md-3 col-from-label">{{translate('Quantity')}} <span class="text-danger">*</span></label> --}}
                                 <div class="col-md-6">
-                                    <input type="number" lang="en" min="0" value="0" step="1" placeholder="{{ translate('Quantity') }}" name="current_stock" class="form-control" required>
+                                    <input type="number" lang="en" min="0" value="" step="1" placeholder="{{ translate('Quantity') }}" name="current_stock" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="{{ translate('SKU') }}" name="sku" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-md-3 col-from-label">
                                     {{translate('SKU')}}
                                 </label>
                                 <div class="col-md-6">
                                     <input type="text" placeholder="{{ translate('SKU') }}" name="sku" class="form-control">
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         {{-- <div class="form-group row">
                             <label class="col-md-3 col-from-label">
@@ -330,17 +356,20 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Meta Title')}}</label>
-                            <div class="col-md-8">
+                            {{-- <label class="col-md-3 col-from-label">{{translate('Meta Title')}}</label> --}}
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" name="meta_title" placeholder="{{ translate('Meta Title') }}">
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{translate('Description')}}</label>
-                            <div class="col-md-8">
-                                <textarea name="meta_description" rows="8" class="form-control"></textarea>
+                            <div class="col-md-6">
+                                <textarea name="meta_description" rows="1" class="form-control" placeholder="Discription"></textarea>
                             </div>
                         </div>
+                        {{-- <div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Description')}}</label>
+                            <div class="col-md-6">
+                                <textarea name="meta_description" rows="8" class="form-control"></textarea>
+                            </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="signinSrEmail">{{ translate('Meta Image') }}</label>
                             <div class="col-md-8">
@@ -357,7 +386,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="col-lg-4">
