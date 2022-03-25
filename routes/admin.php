@@ -242,6 +242,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     // HSN 
     Route::resource('hsn', 'HsnController');
+    Route::resource('csv', 'CsvController');
 
     Route::resource('addons', 'AddonController');
     Route::post('/addons/activation', 'AddonController@activation')->name('addons.activation');

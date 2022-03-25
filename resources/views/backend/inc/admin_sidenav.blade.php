@@ -1015,6 +1015,16 @@
                         </a>
                     </li>
                 @endif
+                
+                <!-- CSV file updoad Code -->
+                @if(Auth::user()->user_type == 'admin' || in_array('25', json_decode(Auth::user()->staff->role->permissions)))
+                    <li class="aiz-side-nav-item">
+                        <a href="{{route('csv.index')}}" class="aiz-side-nav-link {{ areActiveRoutes(['csv.index', 'csv.create'])}}">
+                            <i class="las la-wrench aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">{{'CSV Files'}}</span>
+                        </a>
+                    </li>
+                @endif
 
             <!-- Addon Manager -->
                 @if(Auth::user()->user_type == 'admin' || in_array('21', json_decode(Auth::user()->staff->role->permissions)))
