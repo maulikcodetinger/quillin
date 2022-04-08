@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hsn;
+use App\Models\Category;
 
 class HsnController extends Controller
 {
@@ -25,7 +26,8 @@ class HsnController extends Controller
      */
     public function create()
     {
-        return view('backend.shipping.hsn.create');
+        $categories = Category::all();
+        return view('backend.shipping.hsn.create',compact('categories'));
     }
 
     /**
@@ -37,6 +39,7 @@ class HsnController extends Controller
     public function store(Request $request)
     {
         $hsn = new Hsn;
+        $hsn->category_id = $request->category_id;
         $hsn->name = $request->name;
         $hsn->code = $request->code;
         $hsn->save();
@@ -69,7 +72,8 @@ class HsnController extends Controller
     public function edit($id)
     {
         $hsn = Hsn::find($id);
-        return view('backend.shipping.hsn.edit',compact('hsn'));
+        $categories = Category::all();
+        return view('backend.shipping.hsn.edit',compact('hsn','categories'));
     }
 
     /**
@@ -82,6 +86,7 @@ class HsnController extends Controller
     public function update(Request $request, $id)
     {
         $hsn = Hsn::find($id);
+        $hsn->category_id = $request->category_id;
         $hsn->name = $request->name;
         $hsn->code = $request->code;
         $hsn->save();

@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
-
+<style> 
+option:checked {
+  background: orange linear-gradient(0deg, orange 0%, orange 50%);
+}
+</style>
 @section('content')
 <div class="aiz-titlebar text-left mt-2 mb-3">
     <h5 class="mb-0 h6">{{translate('Select Categories')}}</h5>
@@ -19,9 +23,9 @@
                             {{-- <label class="col-md-3 col-from-label">{{translate('Category')}} <span class="text-danger">*</span></label>
                             <div class="col-md-8"> --}}
                                 <div id="cat_child" class="row p-5">
-                                    <select class="col" name="category_id" id="cat-1" size="4">
+                                    <select class="col btn" name="category_id" id="cat-1" size="4">
                                         @foreach ($categories as $category)
-                                            <option id="{{$category->id}}" value="{{$category->id}}" onclick="myFunction({{$category->id}})">{{$category->name}}</option>
+                                            <option class=" " id="{{$category->id}}" value="{{$category->id}}" onclick="myFunction({{$category->id}})">{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -84,9 +88,9 @@
            success: function(data) {
             if(data.length > 0)
             {
-                var txt = '<select name="category_id" class="col" id="cat-'+j+'" size="4">';
+                var txt = '<select name="category_id" class="col btn" id="cat-'+j+'" size="4">';
                 data.forEach(function(item){
-                    txt += '<option value="'+item['id']+'" id="'+item['id']+'" onclick="myFunction('+item['id']+')">'+ item['name'] +'</option>';
+                    txt += '<option class="" value="'+item['id']+'" id="'+item['id']+'" onclick="myFunction('+item['id']+')">'+ item['name'] +'</option>';
                 })
                 txt += '</select>';
                 
