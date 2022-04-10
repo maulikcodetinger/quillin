@@ -159,12 +159,6 @@ class ProductController extends Controller
         echo json_encode($html);
     }
 
-    public function select_child_category(Request $request)
-    {
-        $child_cat = Category::where('parent_id',$request->id)->get();
-        return $child_cat;
-    }
-
     /**
      * Store a newly created resource in storage.
      *

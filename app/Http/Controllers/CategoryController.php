@@ -225,4 +225,11 @@ class CategoryController extends Controller
         Cache::forget('featured_categories');
         return 1;
     }
+
+    // for select category page Ajax
+    public function select_child_category(Request $request)
+    {
+        $child_cat = Category::where('parent_id',$request->id)->get();
+        return $child_cat;
+    }
 }

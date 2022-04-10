@@ -241,7 +241,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('/colors/destroy/{id}', 'AttributeController@destroy_color')->name('colors.destroy');
 
     // HSN 
+    Route::post('hsn/next_step','HsnController@next_step')->name('hsn.next_step');
     Route::resource('hsn', 'HsnController');
+    Route::post('csv/next_step','CsvController@next_step')->name('csv.next_step');
     Route::resource('csv', 'CsvController');
 
     Route::resource('addons', 'AddonController');

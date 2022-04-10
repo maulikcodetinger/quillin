@@ -225,7 +225,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/products/published', 'ProductController@updatePublished')->name('products.published');
 
     Route::post('/products/add-more-choice-option', 'ProductController@add_more_choice_option')->name('products.add-more-choice-option');
-    Route::post('/products/select_child_category', 'ProductController@select_child_category')->name('products.select_child_category');
+    Route::post('/select_child_category', 'CategoryController@select_child_category')->name('select_child_category');
 
     Route::get('invoice/{order_id}', 'InvoiceController@invoice_download')->name('invoice.download');
 

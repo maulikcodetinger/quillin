@@ -9,14 +9,14 @@ option:checked {
     <h5 class="mb-0 h6">{{translate('Select Categories')}}</h5>
 </div>
 <div class="">
-    <form class="form form-horizontal mar-top" action="{{route('products.next.step')}}" method="POST" enctype="multipart/form-data" id="choice_form">
+    <form class="form form-horizontal mar-top" action="{{route('csv.next_step')}}" method="POST" enctype="multipart/form-data" id="choice_form">
         <div class="row gutters-5">
             <div class="col-lg-12">
                 @csrf
                 <input type="hidden" name="added_by" value="admin">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0 h6">{{translate('Product Information')}}</h5>
+                        <h5 class="mb-0 h6">{{translate('Select Category')}}</h5>
                     </div>
                     <div class="card-body">
                         <div class="form-group row" id="category">

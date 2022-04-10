@@ -26,8 +26,17 @@ class CsvController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('backend.upload.csv.create',compact('categories'));
+        $categories = Category::where('parent_id', 0)
+        ->where('digital', 0)
+        ->with('childrenCategories')
+        ->get();
+        return view('backend.upload.csv.csv_categories',compact('categories'));
+    }
+
+    public function next_step(Request $request)
+    {
+        $category = Category::find($request->category_id);
+        return view('backend.upload.csv.create',compact('category'));
     }
 
     /**

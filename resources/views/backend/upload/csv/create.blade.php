@@ -15,11 +15,10 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-from-label" for="name">{{translate('Category')}}</label>
                         <div class="col-sm-9">
-                            <select class="form-control aiz-selectpicker" name="category_id">
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
+                            <select class="form-control aiz-selectpicker" name="category_id" disabled>
+                                    <option>{{$category->name}}</option>
                             </select>
+                            <input type="hidden" name="category_id" value="{{$category->id}}">
                         </div>
                     </div>
 
