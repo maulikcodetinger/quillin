@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Models\FlashDealProduct;
 use App\Models\ProductTax;
 use App\Models\AttributeValue;
+use App\Models\AttributeCategory;
+use App\Models\Attribute;
 use App\Models\Cart;
 use App\Models\Color;
 use App\Models\User;
@@ -144,7 +146,9 @@ class ProductController extends Controller
     {
         // dd($request);
         $category = Category::find($request->category_id);
-        return view('backend.product.products.create', compact('category'));
+        $atr = AttributeCategory::where('category_id',$category->id)->pluck('attribute_id');
+        $attributes = Attribute::whereIn('id',$atr)->get();
+        return view('backend.product.products.create', compact('category','attributes'));
     }
 
     public function add_more_choice_option(Request $request) {
@@ -467,6 +471,8 @@ class ProductController extends Controller
         CoreComponentRepository::initializeCache();
 
         $product = Product::findOrFail($id);
+        $atr = AttributeCategory::where('category_id',$product->category_id)->pluck('attribute_id');
+        $attributes = Attribute::whereIn('id',$atr)->get();
         if($product->digital == 1) {
             return redirect('digitalproducts/' . $id . '/edit');
         }
@@ -477,7 +483,7 @@ class ProductController extends Controller
             ->where('digital', 0)
             ->with('childrenCategories')
             ->get();
-        return view('backend.product.products.edit', compact('product', 'categories', 'tags','lang'));
+        return view('backend.product.products.edit', compact('attributes','product', 'categories', 'tags','lang'));
      }
 
     /**

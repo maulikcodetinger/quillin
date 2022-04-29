@@ -185,6 +185,8 @@ Route::get('/customer_products/destroy/{id}', 'CustomerProductController@destroy
 Route::group(['prefix' => 'seller', 'middleware' => ['seller', 'verified', 'user']], function() {
     Route::get('/products', 'HomeController@seller_product_list')->name('seller.products');
     Route::get('/product/upload', 'HomeController@show_product_upload_form')->name('seller.products.upload');
+    Route::post('/product/next/upload', 'HomeController@product_upload_form_next_step')->name('seller.products.next.upload');
+    // Route::post('/products/sku_combination', 'HomeController@sku_combination')->name('seller.products.sku_combination');
     Route::get('/product/{id}/edit', 'HomeController@show_product_edit_form')->name('seller.products.edit');
     Route::resource('payments', 'PaymentController');
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Currency;
 use App\Models\Language;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Upload;
 use Session;
 use PDF;
 use Config;
@@ -21,7 +23,7 @@ class InvoiceController extends Controller
             $currency_code = Currency::findOrFail(get_setting('system_default_currency'))->code;
         }
         $language_code = Session::get('locale', Config::get('app.locale'));
-
+        
         if(Language::where('code', $language_code)->first()->rtl == 1){
             $direction = 'rtl';
             $text_align = 'right';
@@ -31,7 +33,7 @@ class InvoiceController extends Controller
             $text_align = 'left';
             $not_text_align = 'right';            
         }
-
+        
         if($currency_code == 'BDT' || $language_code == 'bd'){
             // bengali font
             $font_family = "'Hind Siliguri','sans-serif'";
@@ -51,14 +53,16 @@ class InvoiceController extends Controller
             // general for all
             $font_family = "'Roboto','sans-serif'";
         }
-
+        
         $order = Order::findOrFail($id);
-        return PDF::loadView('backend.invoices.invoice',[
-            'order' => $order,
-            'font_family' => $font_family,
-            'direction' => $direction,
-            'text_align' => $text_align,
-            'not_text_align' => $not_text_align
-        ], [], [])->download('order-'.$order->code.'.pdf');
+        $orderDetail = OrderDetail::where('order_id',$order->id)->with('product')->first();
+        $image = Upload::where('id',$orderDetail->product->thumbnail_img)->first();
+        
+        // dd($image);
+        // dd($not_text_align);
+        return view('backend.invoices.invoice',compact('order','font_family','direction','text_align','not_text_align','image','orderDetail'));
+        // $pdf = PDF::loadView('backend.invoices.invoice',compact('order','font_family','direction','text_align','not_text_align','image','orderDetail'));
+        // return 123;
+        // $pdf->download('order-'.$order->code.'.pdf');
     }
 }
