@@ -17,6 +17,8 @@ use App\Models\Shop;
 use App\Models\Order;
 use App\Models\BusinessSetting;
 use App\Models\Coupon;
+use App\Models\Attribute;
+use App\Models\AttributeCategory;
 use Cookie;
 use Illuminate\Support\Str;
 use App\Mail\SecondEmailVerifyMailManager;
@@ -319,19 +321,30 @@ class HomeController extends Controller
             ->where('digital', 0)
             ->with('childrenCategories')
             ->get();
-        return view('frontend.user.seller.product_upload', compact('categories'));
+        return view('frontend.user.seller.product_categories', compact('categories'));
+    }
+
+    public function product_upload_form_next_step(Request $request)
+    {
+        $category = Category::find($request->category_id);
+        $atr = AttributeCategory::where('category_id',$category->id)->pluck('attribute_id');
+        $attributes = Attribute::whereIn('id',$atr)->get();
+        return view('frontend.user.seller.product_upload', compact('category','attributes'));
+
     }
 
     public function show_product_edit_form(Request $request, $id)
     {
         $product = Product::findOrFail($id);
+        $atr = AttributeCategory::where('category_id',$product->category_id)->pluck('attribute_id');
+        $attributes = Attribute::whereIn('id',$atr)->get();
         $lang = $request->lang;
         $tags = json_decode($product->tags);
         $categories = Category::where('parent_id', 0)
             ->where('digital', 0)
             ->with('childrenCategories')
             ->get();
-        return view('frontend.user.seller.product_edit', compact('product', 'categories', 'tags', 'lang'));
+        return view('frontend.user.seller.product_edit', compact('attributes','product', 'categories', 'tags', 'lang'));
     }
 
     public function seller_product_list(Request $request)

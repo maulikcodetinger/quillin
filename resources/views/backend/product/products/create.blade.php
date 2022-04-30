@@ -126,7 +126,7 @@
                             </div>
                             <div class="col-md-8">
                                 <select name="choice_attributes[]" id="choice_attributes" class="form-control aiz-selectpicker" data-selected-text-format="count" data-live-search="true" multiple data-placeholder="{{ translate('Choose Attributes') }}">
-                                    @foreach (\App\Models\Attribute::all() as $key => $attribute)
+                                    @foreach ($attributes as $key => $attribute)
                                     <option value="{{ $attribute->id }}">{{ $attribute->getTranslation('name') }}</option>
                                     @endforeach
                                 </select>
@@ -482,17 +482,27 @@
                             {{$tax->name}}
                             <input type="hidden" value="{{$tax->id}}" name="tax_id[]">
                         </label>
-
+    
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="number" lang="en" min="0" value="0" step="0.01" placeholder="{{ translate('Tax') }}" name="tax[]" class="form-control" required>
+                            <div class="form-group col-md-12">
+                                <select class="form-control" name="tax[]" id="">
+                                    <option value="0">0%</option>
+                                    <option value="3">3%</option>
+                                    <option value="5">5%</option>
+                                    <option value="12">12%</option>
+                                    <option value="18">18%</option>
+                                    <option value="28">28%</option>
+                                </select>
+                                {{-- <input type="number" lang="en" min="0" value="0" step="0.01"
+                                    placeholder="{{ translate('Tax') }}" name="tax[]" class="form-control" required> --}}
                             </div>
-                            <div class="form-group col-md-6">
+                            <input type="hidden" name="tax_type[]" value="percent">
+                            {{-- <div class="form-group col-md-6">
                                 <select class="form-control aiz-selectpicker" name="tax_type[]">
                                     <option value="amount">{{translate('Flat')}}</option>
                                     <option value="percent">{{translate('Percent')}}</option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                         @endforeach
                     </div>

@@ -197,7 +197,7 @@
             </div> --}}
         </div>
     </div>
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-header">
             <h5 class="mb-0 h6">{{translate('Product Videos')}}</h5>
         </div>
@@ -224,7 +224,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0 h6">{{translate('Product Variation')}}</h5>
@@ -261,7 +261,7 @@
                     <select name="choice_attributes[]" data-live-search="true" data-selected-text-format="count"
                         id="choice_attributes" class="form-control aiz-selectpicker" multiple
                         data-placeholder="{{ translate('Choose Attributes') }}">
-                        @foreach (\App\Models\Attribute::all() as $key => $attribute)
+                        @foreach ($attributes as $key => $attribute)
                         <option value="{{ $attribute->id }}" @if($product->attributes != null &&
                             in_array($attribute->id, json_decode($product->attributes, true))) selected
                             @endif>{{ $attribute->getTranslation('name') }}</option>
@@ -400,7 +400,7 @@
         </div>
     </div>
 
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-header">
             <h5 class="mb-0 h6">{{translate('PDF Specification')}}</h5>
         </div>
@@ -421,7 +421,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0 h6">{{translate('SEO Meta Tags')}}</h5>

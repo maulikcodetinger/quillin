@@ -31,14 +31,10 @@
                         <label class="col-md-3 col-from-label">{{translate('Category')}}</label>
                         <div class="col-md-8">
                             <select class="form-control aiz-selectpicker" name="category_id" id="category_id"
-                                data-live-search="true" required>
-                                @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->getTranslation('name') }}</option>
-                                @foreach ($category->childrenCategories as $childCategory)
-                                @include('categories.child_category', ['child_category' => $childCategory])
-                                @endforeach
-                                @endforeach
+                                data-live-search="true" disabled>
+                                <option>{{ $category->getTranslation('name') }}</option>
                             </select>
+                            <input type="hidden" name="category_id" value="{{$category->id}}">
                         </div>
                     </div>
                     <div class="form-group row" id="brand">
@@ -135,7 +131,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0 h6">{{translate('Product Videos')}}</h5>
                 </div>
@@ -158,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0 h6">{{translate('Product Variation')}}</h5>
@@ -195,7 +191,7 @@
                                 class="form-control aiz-selectpicker" data-live-search="true"
                                 data-selected-text-format="count" multiple
                                 data-placeholder="{{ translate('Choose Attributes') }}">
-                                @foreach (\App\Models\Attribute::all() as $key => $attribute)
+                                @foreach ($attributes as $key => $attribute)
                                 <option value="{{ $attribute->id }}">{{ $attribute->getTranslation('name') }}</option>
                                 @endforeach
                             </select>
@@ -265,7 +261,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label class="col-md-3 col-from-label">
                             {{translate('External link')}}
                         </label>
@@ -273,8 +269,8 @@
                             <input type="text" placeholder="{{ translate('External link') }}" name="external_link" class="form-control">
                             <small class="text-muted">{{translate('Leave it blank if you do not use external site link')}}</small>
                         </div>
-                    </div>
-                    <div class="form-group row">
+                    </div> --}}
+                    {{-- <div class="form-group row">
                         <label class="col-md-3 col-from-label">
                             {{translate('External link button text')}}
                         </label>
@@ -282,7 +278,7 @@
                             <input type="text" placeholder="{{ translate('External link button text') }}" name="external_link_btn" class="form-control">
                             <small class="text-muted">{{translate('Leave it blank if you do not use external site link')}}</small>
                         </div>
-                    </div>
+                    </div> --}}
                     <br>
                     <div class="sku_combination" id="sku_combination">
 
@@ -303,7 +299,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0 h6">{{translate('PDF Specification')}}</h5>
                 </div>
@@ -325,7 +321,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0 h6">{{translate('SEO Meta Tags')}}</h5>
@@ -523,16 +519,25 @@
                     </label>
 
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <input type="number" lang="en" min="0" value="0" step="0.01"
-                                placeholder="{{ translate('Tax') }}" name="tax[]" class="form-control" required>
+                        <div class="form-group col-md-12">
+                            <select class="form-control" name="tax[]" id="">
+                                <option value="0">0%</option>
+                                <option value="3">3%</option>
+                                <option value="5">5%</option>
+                                <option value="12">12%</option>
+                                <option value="18">18%</option>
+                                <option value="28">28%</option>
+                            </select>
+                            {{-- <input type="number" lang="en" min="0" value="0" step="0.01"
+                                placeholder="{{ translate('Tax') }}" name="tax[]" class="form-control" required> --}}
                         </div>
-                        <div class="form-group col-md-6">
+                        <input type="hidden" name="tax_type[]" value="percent">
+                        {{-- <div class="form-group col-md-6">
                             <select class="form-control aiz-selectpicker" name="tax_type[]">
                                 <option value="amount">{{translate('Flat')}}</option>
                                 <option value="percent">{{translate('Percent')}}</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     @endforeach
                 </div>

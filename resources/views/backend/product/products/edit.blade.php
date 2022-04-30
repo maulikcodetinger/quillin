@@ -165,7 +165,7 @@
                         </div> --}}
                     </div>
                 </div>
-                <div class="card">
+                <!-- <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{translate('Product Videos')}}</h5>
                     </div>
@@ -187,7 +187,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{translate('Product Variation')}}</h5>
@@ -222,7 +222,7 @@
                             </div>
                             <div class="col-lg-8">
                                 <select name="choice_attributes[]" id="choice_attributes" data-selected-text-format="count" data-live-search="true" class="form-control aiz-selectpicker" multiple data-placeholder="{{ translate('Choose Attributes') }}">
-                                    @foreach (\App\Models\Attribute::all() as $key => $attribute)
+                                    @foreach ($attributes as $key => $attribute)
                                     <option value="{{ $attribute->id }}" @if($product->attributes != null && in_array($attribute->id, json_decode($product->attributes, true))) selected @endif>{{ $attribute->getTranslation('name') }}</option>
                                     @endforeach
                                 </select>
@@ -367,7 +367,7 @@
                     </div>
                 </div>-->
 
-                <div class="card">
+                <!-- <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{translate('PDF Specification')}}</h5>
                     </div>
@@ -387,7 +387,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{translate('SEO Meta Tags')}}</h5>
